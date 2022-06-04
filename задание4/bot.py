@@ -15,7 +15,8 @@ groups = {
     'Group1': {'days_range': 'понедельник - четверг', 'time_range': '20:00 - 22:00',
                'members': 'cirmiuwu#1039,Bankai#6237'},
     'Group2': {'days_range': 'вторник - пятница', 'time_range': '20:00 - 22:00', 'members': 'cirmiuwu#1039'},
-    'Group3': {'days_range': 'суббота - понедельник', 'time_range': '16:00 - 18:00', 'members': 'Bankai#6237,Ktirskikh#8472'}
+    'Group3': {'days_range': 'суббота - понедельник', 'time_range': '16:00 - 18:00',
+               'members': 'Bankai#6237,Ktirskikh#8472'}
 
 }
 
@@ -61,7 +62,7 @@ def format_days_range(days_range: str):
 
 def check_days_range(days_range) -> bool:
     days_range = format_days_range(days_range)
-    print(days_range)
+
     today = datetime.datetime.today().weekday()
 
     if days_range[1] < days_range[0]:
@@ -73,14 +74,13 @@ def check_days_range(days_range) -> bool:
     return False
 
 
-def save_log():
-    with open('log.txt', 'w', encoding='utf-8') as f:
-        for key, value in users.items():
-            f.write(f'{key} -> {value.get("enter_count")}\n')
+def save_log(user_name: str):
+    with open('log.txt', 'a', encoding='utf-8') as f:
+        f.write(f'{user_name} -> Посетил занятие')
 
 
-def check_enter_time(group_name: str, user_name: str) -> bool:
-    end_hour = int(groups[group_name]['time_range'].split('-')[0].strip().split(':')[0])
+def check_enter_time(group_name: str, user_name: str):
+    end_hour = int(groups[group_name]['time_range'].split('-')[1].strip().split(':')[0])
 
     if check_days_range(days_range=groups[group_name]['days_range']):
         if check_time_range(groups[group_name]['time_range']):
@@ -88,7 +88,7 @@ def check_enter_time(group_name: str, user_name: str) -> bool:
             while datetime.time() < datetime.time(end_hour):
                 time.sleep(1)
                 print('Ожидаем конца занятия')
-            save_log()
+            save_log(user_name)
 
 
 async def check_enter(user: discord.User, channel: discord.VoiceChannel):
