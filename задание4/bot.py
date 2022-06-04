@@ -2,6 +2,8 @@ import csv
 import datetime
 
 import asyncio
+import time
+
 import discord
 from discord import Client
 from discord.ext import commands
@@ -10,10 +12,10 @@ DAYS_OF_WEEK = {'понедельник': 1, 'вторник': 2, 'среда': 
                 'суббота': 6, 'воскресенье': 7}
 
 groups = {
-    'Group1': {'days_range': 'суббота - понедельник', 'time_range': '20:00 - 06:00',
-               'members': 'Blackvenon223#5707'},
+    'Group1': {'days_range': 'понедельник - четверг', 'time_range': '20:00 - 22:00',
+               'members': 'cirmiuwu#1039,Bankai#6237'},
     'Group2': {'days_range': 'вторник - пятница', 'time_range': '20:00 - 22:00', 'members': 'cirmiuwu#1039'},
-    'Group3': {'days_range': 'суббота - понедельник', 'time_range': '22:00 - 05:00', 'members': 'Blackvenon223#5707'}
+    'Group3': {'days_range': 'суббота - понедельник', 'time_range': '16:00 - 18:00', 'members': 'Bankai#6237,Ktirskikh#8472'}
 
 }
 
@@ -83,9 +85,9 @@ def check_enter_time(group_name: str, user_name: str) -> bool:
     if check_days_range(days_range=groups[group_name]['days_range']):
         if check_time_range(groups[group_name]['time_range']):
             users[user_name]['enter_count'] += 1
-            '''while datetime.time() < datetime.time(end_hour):
-                asyncio.sleep(1)
-                print(5)'''
+            while datetime.time() < datetime.time(end_hour):
+                time.sleep(1)
+                print('Ожидаем конца занятия')
             save_log()
 
 
