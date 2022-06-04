@@ -26,4 +26,4 @@ with open('participants.txt', 'r', encoding='utf-8') as file:
 
 for participant in participants:
     count_of_passed_tasks = count_passed_tasks(username=participant)
-    print(count_of_passed_tasks)
+    print(f'{participant} --> {count_of_passed_tasks}')
