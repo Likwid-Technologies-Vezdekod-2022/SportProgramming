@@ -5,19 +5,22 @@ import requests
 
 def count_passed_tasks(username: str) -> int:
     response = requests.get(url=f'https://codeforces.com/api/user.status?handle={username}')
+    tasks = []
 
     if response.status_code == 200:
 
         content = json.loads(response.content.decode())
-        success_counter: int = 0
+
         for submission in content['result']:
-            if submission['verdict'] == 'OK':
-                success_counter += 1
+
+            if submission['problem']['name'] not in tasks:
+                tasks.append(submission['problem']['name'])
+
+        return len(tasks)
+
     else:
 
         raise Exception('Ошибка запроса')
-
-    return success_counter
 
 
 with open('participants.txt', 'r', encoding='utf-8') as file:
