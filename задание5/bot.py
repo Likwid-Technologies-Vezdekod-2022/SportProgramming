@@ -4,7 +4,7 @@ from discord.ext import commands
 from api_requests import ApiRequests
 
 config = {
-    'token': 'OTgyNjY1NTU2OTYyNDcxOTk4.G326Lt.IkpEBP5A5WFp8dqUp8_nWxD7z0cFXm16bNVbvE',
+    'token': 'ВАШ ТОКЕН',
     'prefix': '!'
 }
 
